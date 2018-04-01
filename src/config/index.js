@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import rootPath from 'app-root-path';
-import config from './config';
+import config from 'config/env';
 
-const env = process.env.ENV || 'dev';
+const env = process.env.NODE_ENV || 'dev';
 
 const envMap = {
     'production': '/env/prod.env',
