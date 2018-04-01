@@ -1,5 +1,12 @@
 /dist
 /logs
-/npm-debug.log
 /node_modules
+
+#Mac OS X
 .DS_Store
+
+#env
+env/*
+
+#log
+*.log
