@@ -9,6 +9,7 @@ import api from 'api';
 import config from 'config';
 
 
+
 let app = express();
 app.server = http.createServer(app);
 
@@ -29,7 +30,7 @@ app.use(middleware({ config }));
 // api router
 app.use('/api', api);
 
-db.sequelize.sync()
+db.sequelize.sync({force : true})
 	.then(() => {
 		app.server.listen(process.env.PORT || config.context.port, () => {
 			console.log(`Started on port ${app.server.address().port}`);
