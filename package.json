@@ -4,7 +4,7 @@
   "description": "Starter project for an ES6 RESTful Express API",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "dev": "nodemon --inspect -w src --exec \"babel-node src --presets es2015,stage-0\"",
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "npm run -s build",
@@ -24,11 +24,6 @@
       "no-unused-vars": 1
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/developit/express-es6-rest-api.git"
-  },
-  "author": "Jason Miller <jason@developit.ca>",
   "license": "MIT",
   "dependencies": {
     "app-root-path": "^2.0.1",
@@ -55,13 +50,5 @@
     "babel-preset-stage-0": "^6.5.0",
     "eslint": "^4.19.1",
     "nodemon": "^1.9.2"
-  },
-  "bugs": {
-    "url": "https://github.com/developit/express-es6-rest-api/issues"
-  },
-  "homepage": "https://github.com/developit/express-es6-rest-api#readme",
-  "keywords": [
-    "express",
-    "sequelizer"
-  ]
+  }
 }
