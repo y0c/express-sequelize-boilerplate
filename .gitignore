@@ -13,3 +13,4 @@ env/*
 
 #yarn
 yarn.lock
+pacakage-lock.json
