@@ -13,5 +13,12 @@ export default (env) => ({
         database: env.DB_DATABASE,
         dialect: env.DB_DIALECT,
         host: env.DB_HOST
-    }
-})
+    },
+    passport : {
+        jwt : { 
+            secret : env.PASSPORT_JWT_SECRET,
+            session : env.PASSPORT_JWT_SESSION
+        }
+    },
+    sha256Secret : env.sha256Secret
+});

@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import ctrl from './user.ctrl';
-import db from 'db';
+import authJwt from 'config/passport/jwt';
 
 const router = new Router();
 
-router.get('/', ({ params }, res) => {
-    res.send('200 Ok!!');
-});
-
-router.post('/', ctrl.signup);
+router.post('/signup', ctrl.signup);
+router.post('/signin', ctrl.signin);
+router.get('/me', authJwt.authenticate(), ctrl.me);
 
 export default router;

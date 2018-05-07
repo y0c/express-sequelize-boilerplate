@@ -14,9 +14,12 @@ yarn
 
 ## ENV Setting
 Input your config information env/dev.env
+
 development : dev.env
+
 production : production.env
 ```
+#env sample
 NODE_PATH=src
 PORT=8080
 BODY_LIMIT=100kb

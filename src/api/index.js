@@ -1,9 +1,11 @@
 import { version } from '../../package.json';
 import { Router } from 'express';
+
 import user from './user';
 
 export default (() => {
 	let api = Router();
+
 
 	api.use('/user', user);
 
@@ -13,4 +15,4 @@ export default (() => {
 	});
 
 	return api;
-})()
+})();
