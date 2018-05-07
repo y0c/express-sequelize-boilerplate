@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import middleware from 'middleware';
+import authJwt from 'config/passport/jwt';
 import db from 'db';
 import api from 'api';
 import config from 'config';
@@ -16,6 +17,7 @@ app.server = http.createServer(app);
 // logger
 app.use(morgan('dev'));
 
+
 // 3rd party middleware
 app.use(cors({
 	exposedHeaders: config.request.corsHeader
@@ -27,6 +29,7 @@ app.use(bodyParser.json({
 
 app.use(middleware({ config }));
 
+app.use(authJwt.initialize());
 // api router
 app.use('/api', api);
 

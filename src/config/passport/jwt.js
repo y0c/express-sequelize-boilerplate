@@ -8,19 +8,19 @@ const Strategy   = passportJWT.Strategy;
 
 const User = db.sequelize.models.User;
 
-var params = {  
+var options = {  
     secretOrKey: config.passport.jwt.secret,
-    jwtFromRequest: ExtractJwt.fromHeader()
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT')
+
 };
 
+console.log(options);
 export default (() => {
 
-    let strategy = new Strategy(params, function(payload, done) {
+    let strategy = new Strategy(options, function(payload, done) {
 
-        console.log(payload);
         User.findOne({ where : { email : payload.email }})
             .then( user => {
-                
                 if ( user ) {
                     return done(null, {
                         email : user.email
@@ -33,6 +33,13 @@ export default (() => {
 
     });
 
+    passport.serializeUser((user, done) => { 
+       done(null, user);
+    });
+    
+    passport.deserializeUser((user, done) => { 
+       done(null, user); 
+    });
     passport.use(strategy);
 
     return {
@@ -40,7 +47,7 @@ export default (() => {
             return passport.initialize();
         },
         authenticate: () => {
-            return passport.authenticate("jwt", { session : config.passport.jwt.session } );
+            return passport.authenticate("jwt", { session : config.passport.jwt.session });
         }
     };
 })();

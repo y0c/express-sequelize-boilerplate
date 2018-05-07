@@ -12,12 +12,12 @@ ctrl.signup = async ({ body }, res) => {
         const user = await User.create({ email: body.email, password: body.password });
 
         if (user) {
-            res.json( 200, { message : 'success' });
+            res.status(200).send({ message : 'success' });
         } else { 
-            res.json( 500, { message : 'something wrong!'});
+            res.status(500).send({ message : 'something wrong!'});
         }
     } catch ( error ) {
-        res.json( 500, { error } );
+        res.status(500).send({ error } );
     } 
 
 };
@@ -33,28 +33,29 @@ ctrl.signin = async ({ body }, res) => {
     try {
         const findUser = await User.findOne({ where : { email }});
         if ( !findUser ) { 
-            res.json( 401, { message : 'no search user found'});
+            res.status(401).send({ message : 'no search user found'});
         } else {
             if ( findUser.verify(password) ) { 
                 let payload = { email : findUser.email };
-                let token = jwt.sign(payload, config.passport.jwt.secret );
+                let token = jwt.sign(payload, config.passport.jwt.secret, { expiresIn: '1d' } );
 
-                res.json( 200, { message : 'success', token });
+                res.status(200).send({ message : 'success', token : "JWT " + token });
+
 
             } else {
-                res.json( 401, { message : 'password did not match '});
+                res.status(401).send({ message : 'password did not match '});
             }
         }
     } catch ( error ) {
-        res.json( 500, { error });
+        res.status(500).send({ error });
     }
 
 
 };
 
 
-ctrl.me = async ({ body, user }, res ) => {
-    res.json(200, { user });
+ctrl.me = ({ body, user }, res ) => {
+    res.status(200).send({ user });
 };
 
 export default ctrl;
